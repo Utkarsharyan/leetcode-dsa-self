@@ -6,9 +6,10 @@ public class hasmapprac1 {
         int arr[]={1,2,3,1};
         HashSet<Integer>map=new HashSet<>();
         for(int i=0;i<arr.length;i++){
-            if(map.contains(i)){
+            if(map.contains(arr[i])){
                 System.out.println("the number "+arr[i]+" more than once");
             }
+            map.add(arr[i]);
         }
         System.out.println("no number is more than once");
     }
