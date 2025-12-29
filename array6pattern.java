@@ -11,6 +11,7 @@ public class array6pattern {
         String s="abcabcbb";
         System.out.println(maxstrlen(s));
     }
+    //Hashmap+slidingwindow
     static int maxstrlen(String s){
         HashMap<Character,Integer>map=new HashMap<>();
         int left=0;
@@ -18,6 +19,8 @@ public class array6pattern {
         for(int right=0;right<s.length();right++){
             char c=s.charAt(right);
             if(map.containsKey(c)){
+                //map se previous location derive karke left ko plus 1
+                //Math.max ka use kiye h ki left pointer piche nhi jae
                 left=Math.max(left,map.get(c)+1);
             }
             map.put(c, right);
