@@ -11,6 +11,7 @@ public class array3pattern {
         int arr[]={0, 1, 0, 3, 12};
         System.out.println(Arrays.toString(fastslowtwopinters(arr)));
     }
+    //two pointers fast slow pointers
     static int[] fastslowtwopinters(int[]arr){
         int slow=0;
         for(int fast=0;fast<arr.length;fast++){

@@ -4,6 +4,7 @@
 // s = "abcabcbb"
 // Output = 3  // "abc"
 
+//string pattern 1
 import java.util.HashMap;
 
 public class array6pattern {
@@ -27,6 +28,5 @@ public class array6pattern {
             max=Math.max(max, right-left+1);
         }
         return max;
-
     }
 }
