@@ -6,7 +6,8 @@
 // arr = [2, 4, 6, 8, 10]
 // Query: l = 1, r = 3
 // Output: 18  // 4 + 6 + 8
-
+// PATTERN: Prefix Sum
+// PROBLEM: Range Sum Query (l to r)
 public class array9pattern {
     public static void main(String[] args) {
         int arr[]={2, 4, 6, 8, 10};

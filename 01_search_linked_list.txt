@@ -1,0 +1,61 @@
+==============================
+PATTERN: Linked List Traversal
+PROBLEM: Search in a Linked List
+==============================
+
+PROBLEM STATEMENT:
+Given the head of a singly linked list and a value X,
+check whether X exists in the list.
+
+--------------------------------
+BRUTE FORCE / OPTIMAL APPROACH
+--------------------------------
+Since linked lists do not support indexing,
+the only way to search is sequential traversal.
+
+Steps:
+1. Start from the head node
+2. Compare current node value with X
+3. If match found, return true
+4. Move to next node
+5. If end is reached, return false
+
+--------------------------------
+WHY THIS IS OPTIMAL
+--------------------------------
+- No random access in linked lists
+- Every node may need to be checked
+- Cannot do better than O(n)
+
+--------------------------------
+JAVA CODE
+--------------------------------
+boolean search(ListNode head, int x) {
+    ListNode curr = head;
+    while (curr != null) {
+        if (curr.val == x)
+            return true;
+        curr = curr.next;
+    }
+    return false;
+}
+--------------------------------
+TIME & SPACE COMPLEXITY
+--------------------------------
+Time: O(n)
+Space: O(1)
+--------------------------------
+WHEN TO USE THIS PATTERN
+--------------------------------
+- Searching elements in linked list
+- Traversal based problems
+- Counting nodes
+- Printing list
+
+--------------------------------
+KEY TAKEAWAY
+--------------------------------
+In linked lists:
+Traversal is the foundation.
+No shortcuts exist.
+==============================
