@@ -1,0 +1,259 @@
+=====================================================
+HASHMAP & HASHSET — MASTER THEORY + USAGE FILE
+(Java | DSA | Interviews)
+=====================================================
+
+-----------------------------------------------------
+1. WHAT IS HASHING?
+-----------------------------------------------------
+
+Hashing is a technique to store and retrieve data in
+average O(1) time using a hash function.
+
+Instead of searching linearly, we directly jump to the
+location where the data should exist.
+
+Used heavily in:
+- Fast lookups
+- Counting frequencies
+- Checking existence
+- Mapping relationships
+
+-----------------------------------------------------
+2. HASHMAP vs HASHSET
+-----------------------------------------------------
+
+HashMap<K, V>:
+- Stores key → value pairs
+- Keys are unique
+- Values can be duplicated
+
+HashSet<E>:
+- Stores only unique elements
+- Internally backed by a HashMap
+- No duplicate values allowed
+
+-----------------------------------------------------
+3. WHEN TO USE WHICH?
+-----------------------------------------------------
+
+Use HashMap when:
+- You need to store counts (frequency)
+- You need mapping (id → value)
+- You need last seen index
+
+Use HashSet when:
+- You only care about existence
+- You want uniqueness
+- You don’t need counts
+
+-----------------------------------------------------
+4. COMMONLY USED HASHMAP METHODS (Java)
+-----------------------------------------------------
+
+Creation:
+---------------------------------
+Map<KeyType, ValueType> map = new HashMap<>();
+---------------------------------
+
+Insert / Update:
+---------------------------------
+map.put(key, value);
+---------------------------------
+
+Get value:
+---------------------------------
+map.get(key);             // returns value or null
+---------------------------------
+
+Safe get with default:
+---------------------------------
+map.getOrDefault(key, 0);
+---------------------------------
+
+Check key existence:
+---------------------------------
+map.containsKey(key);
+---------------------------------
+
+Remove key:
+---------------------------------
+map.remove(key);
+---------------------------------
+
+Iterate over map:
+---------------------------------
+for (Map.Entry<K, V> entry : map.entrySet()) {
+    entry.getKey();
+    entry.getValue();
+}
+---------------------------------
+
+-----------------------------------------------------
+5. COMMONLY USED HASHSET METHODS (Java)
+-----------------------------------------------------
+
+Creation:
+---------------------------------
+Set<Type> set = new HashSet<>();
+---------------------------------
+
+Add element:
+---------------------------------
+set.add(value);
+---------------------------------
+
+Check existence:
+---------------------------------
+set.contains(value);
+---------------------------------
+
+Remove element:
+---------------------------------
+set.remove(value);
+---------------------------------
+
+Iterate:
+---------------------------------
+for (Type val : set) {
+    // use val
+}
+---------------------------------
+
+-----------------------------------------------------
+6. MOST COMMON HASHING PATTERNS
+-----------------------------------------------------
+
+---------------------------------
+PATTERN 1: FREQUENCY COUNT
+---------------------------------
+
+Use when:
+- Counting characters
+- Anagrams
+- Majority element
+
+Snippet:
+---------------------------------
+Map<Character, Integer> map = new HashMap<>();
+for (char c : s.toCharArray()) {
+    map.put(c, map.getOrDefault(c, 0) + 1);
+}
+---------------------------------
+
+---------------------------------
+PATTERN 2: COMPLEMENT CHECK (Two Sum)
+---------------------------------
+
+Use when:
+- Pair problems
+- Target sum
+
+Snippet:
+---------------------------------
+Set<Integer> set = new HashSet<>();
+for (int x : arr) {
+    if (set.contains(target - x))
+        return true;
+    set.add(x);
+}
+---------------------------------
+
+---------------------------------
+PATTERN 3: LAST SEEN INDEX
+---------------------------------
+
+Use when:
+- Sliding window + duplicates
+- Strings without repetition
+
+Snippet:
+---------------------------------
+Map<Character, Integer> lastIndex = new HashMap<>();
+if (lastIndex.containsKey(c)) {
+    left = Math.max(left, lastIndex.get(c) + 1);
+}
+lastIndex.put(c, right);
+---------------------------------
+
+---------------------------------
+PATTERN 4: PREFIX SUM + HASHMAP
+---------------------------------
+
+Use when:
+- Subarray sum equals k
+- Negative numbers present
+
+Snippet:
+---------------------------------
+Map<Integer, Integer> map = new HashMap<>();
+map.put(0, 1);
+int sum = 0;
+
+for (int x : arr) {
+    sum += x;
+    if (map.containsKey(sum - k))
+        count += map.get(sum - k);
+    map.put(sum, map.getOrDefault(sum, 0) + 1);
+}
+---------------------------------
+
+-----------------------------------------------------
+7. TIME & SPACE COMPLEXITY
+-----------------------------------------------------
+
+Average Case:
+- Insert: O(1)
+- Lookup: O(1)
+- Delete: O(1)
+
+Worst Case (rare):
+- O(n) due to collisions
+
+Space:
+- O(n)
+
+-----------------------------------------------------
+8. IMPORTANT INTERVIEW RULES
+-----------------------------------------------------
+
+- HashMap does NOT maintain order
+- HashSet does NOT maintain order
+- Use LinkedHashMap if order matters
+- Use TreeMap if sorted order is needed (O(log n))
+
+-----------------------------------------------------
+9. COMMON INTERVIEW MISTAKES
+-----------------------------------------------------
+
+- Using HashMap when HashSet is enough
+- Forgetting to update frequency back
+- Ignoring space complexity
+- Sorting unnecessarily
+
+-----------------------------------------------------
+10. MUST-PRACTICE LEETCODE QUESTIONS
+-----------------------------------------------------
+
+HashMap:
+- 1. Two Sum
+- 560. Subarray Sum Equals K
+- 387. First Unique Character in a String
+
+HashSet:
+- 217. Contains Duplicate
+- 128. Longest Consecutive Sequence
+- 349. Intersection of Two Arrays
+
+-----------------------------------------------------
+11. KEY TAKEAWAYS (VERY IMPORTANT)
+-----------------------------------------------------
+
+- HashMap = mapping / counting
+- HashSet = existence / uniqueness
+- If lookup needs to be fast → Hashing
+- Trade space for time consciously
+
+=====================================================
+END OF HASHMAP & HASHSET MASTER FILE
+=====================================================
