@@ -1,0 +1,183 @@
+=====================================================
+LINKED LIST CYCLE DETECTION — MASTER PATTERN FILE
+(Floyd’s Algorithm | Fast & Slow Pointers)
+=====================================================
+
+-----------------------------------------------------
+1. WHAT IS A CYCLE IN A LINKED LIST?
+-----------------------------------------------------
+
+A cycle exists in a linked list if:
+- A node’s next pointer points to a previous node
+- Traversing the list never reaches null
+- The list becomes infinite
+
+Example:
+1 → 2 → 3 → 4
+      ↑     ↓
+      ← ← ←
+
+-----------------------------------------------------
+2. WHEN TO USE CYCLE DETECTION
+-----------------------------------------------------
+
+Use this pattern when:
+- The problem mentions "loop" or "cycle"
+- The list might not terminate
+- You need to check infinite traversal
+- You need to find start of a loop
+
+-----------------------------------------------------
+3. KEYWORDS / SIGNALS IN QUESTIONS
+-----------------------------------------------------
+
+If you see:
+- "detect cycle"
+- "loop in linked list"
+- "circular linked list"
+- "infinite traversal"
+- "start of cycle"
+
+→ Immediately think **Floyd’s Algorithm**
+
+-----------------------------------------------------
+4. BRUTE FORCE APPROACH (Naive)
+-----------------------------------------------------
+
+Idea:
+Track visited nodes using extra memory.
+
+Steps:
+1. Traverse the list
+2. Store each visited node in a HashSet
+3. If a node is visited again → cycle exists
+4. If null is reached → no cycle
+
+Time Complexity: O(n)
+Space Complexity: O(n)
+
+Why this is NOT optimal:
+- Uses extra memory
+- Interviewers prefer O(1) space
+
+-----------------------------------------------------
+5. OPTIMIZED APPROACH (FLOYD’S ALGORITHM)
+-----------------------------------------------------
+
+This uses **Fast & Slow Pointers**.
+
+Idea:
+- Slow pointer moves 1 step
+- Fast pointer moves 2 steps
+- If a cycle exists, fast will eventually meet slow
+
+If no cycle:
+- Fast pointer reaches null
+
+-----------------------------------------------------
+6. GENERIC SAFE TEMPLATE (IMPORTANT)
+-----------------------------------------------------
+
+ALWAYS use this condition:
+---------------------------------
+Node slow = head;
+Node fast = head;
+
+while (fast != null && fast.next != null) {
+    slow = slow.next;
+    fast = fast.next.next;
+
+    if (slow == fast) {
+        return true;   // cycle detected
+    }
+}
+return false;          // no cycle
+---------------------------------
+
+NEVER use:
+---------------------------------
+while (fast != null)
+---------------------------------
+This can cause NullPointerException.
+
+-----------------------------------------------------
+7. WHY FAST & SLOW POINTERS WORK
+-----------------------------------------------------
+
+- Fast pointer gains 1 node per step over slow
+- In a cycle, this gap keeps reducing
+- Eventually, both pointers meet
+
+This is similar to two runners on a circular track.
+
+-----------------------------------------------------
+8. TIME & SPACE COMPLEXITY
+-----------------------------------------------------
+
+Time Complexity:
+- O(n)
+
+Space Complexity:
+- O(1)
+
+This is optimal.
+
+-----------------------------------------------------
+9. COMMON INTERVIEW MISTAKES
+-----------------------------------------------------
+
+- Forgetting fast.next != null
+- Comparing values instead of node references
+- Using HashSet when O(1) space is expected
+- Assuming cycle always exists
+
+-----------------------------------------------------
+10. VARIANTS OF THIS PROBLEM
+-----------------------------------------------------
+
+1. Detect if cycle exists
+2. Find start of the cycle
+3. Find length of the cycle
+4. Remove the cycle
+
+ALL of these build on the same template.
+
+-----------------------------------------------------
+11. MUST-PRACTICE LEETCODE QUESTIONS
+-----------------------------------------------------
+
+CORE:
+- 141. Linked List Cycle
+- 142. Linked List Cycle II
+
+INTERMEDIATE:
+- 287. Find the Duplicate Number
+  (Array version using Floyd’s Algorithm)
+
+ADVANCED:
+- 457. Circular Array Loop
+
+-----------------------------------------------------
+12. INTERVIEW DECISION CHECK
+-----------------------------------------------------
+
+Ask yourself:
+- Is the list infinite?
+- Do I need to detect repetition without extra space?
+
+If YES → Floyd’s Cycle Detection.
+
+-----------------------------------------------------
+13. KEY TAKEAWAY (VERY IMPORTANT)
+-----------------------------------------------------
+
+Cycle detection is NOT about values.
+It is about POINTERS meeting.
+
+If you master this:
+- You master fast–slow pointers
+- You unlock multiple advanced linked list problems
+
+=====================================================
+END OF LINKED LIST CYCLE DETECTION MASTER FILE
+=====================================================
