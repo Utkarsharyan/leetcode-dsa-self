@@ -1,0 +1,230 @@
+=====================================================
+FAST & SLOW POINTERS — MASTER PATTERN FILE
+(Linked List + Array | Interview Ready)
+=====================================================
+
+-----------------------------------------------------
+1. WHAT IS THE FAST & SLOW POINTER PATTERN?
+-----------------------------------------------------
+
+Fast & Slow Pointer (also called Tortoise & Hare) is a
+two-pointer technique where:
+
+- One pointer moves one step at a time (slow)
+- Another pointer moves two steps at a time (fast)
+
+This difference in speed allows us to:
+- Find middle elements
+- Detect cycles
+- Measure distances inside linked lists
+- Compare two halves efficiently
+
+-----------------------------------------------------
+2. WHEN TO USE FAST & SLOW POINTERS
+-----------------------------------------------------
+
+Use this pattern when:
+- You need the middle of a linked list
+- You need to detect a cycle
+- You need to find the start of a cycle
+- You need to split a linked list into halves
+- You need to check palindrome in a linked list
+
+-----------------------------------------------------
+3. KEYWORDS / SIGNALS IN QUESTIONS
+-----------------------------------------------------
+
+If you see words like:
+- "middle of linked list"
+- "cycle"
+- "loop"
+- "circular linked list"
+- "two halves"
+- "palindrome linked list"
+
+→ Think FAST & SLOW POINTERS immediately.
+
+-----------------------------------------------------
+4. GENERIC FAST & SLOW TEMPLATE (MOST IMPORTANT)
+-----------------------------------------------------
+
+SAFE STANDARD TEMPLATE:
+---------------------------------
+Node slow = head;
+Node fast = head;
+
+while (fast != null && fast.next != null) {
+    slow = slow.next;        // 1 step
+    fast = fast.next.next;  // 2 steps
+}
+---------------------------------
+
+After loop:
+- slow is at middle (or relevant position)
+
+NEVER use:
+---------------------------------
+while (fast != null)
+---------------------------------
+This can cause NullPointerException.
+
+-----------------------------------------------------
+5. COMMON USE CASES WITH EXPLANATION
+-----------------------------------------------------
+
+---------------------------------
+CASE 1: FIND MIDDLE OF LINKED LIST
+---------------------------------
+
+Idea:
+- slow moves 1 step
+- fast moves 2 steps
+- When fast reaches end, slow is in the middle
+
+Result:
+- Even length → returns SECOND middle
+- Odd length → returns exact middle
+
+---------------------------------
+CASE 2: DETECT CYCLE (FLOYD’S ALGORITHM)
+---------------------------------
+
+Idea:
+- If there is a cycle, fast and slow WILL meet
+- If fast reaches null, no cycle exists
+
+Snippet:
+---------------------------------
+while (fast != null && fast.next != null) {
+    slow = slow.next;
+    fast = fast.next.next;
+    if (slow == fast)
+        return true;
+}
+return false;
+---------------------------------
+
+---------------------------------
+CASE 3: FIND START OF CYCLE
+---------------------------------
+
+Steps:
+1. Detect cycle (slow == fast)
+2. Move one pointer to head
+3. Move both pointers 1 step at a time
+4. Meeting point = start of cycle
+
+Snippet:
+---------------------------------
+slow = head;
+while (slow != fast) {
+    slow = slow.next;
+    fast = fast.next;
+}
+---------------------------------
+
+---------------------------------
+CASE 4: PALINDROME LINKED LIST
+---------------------------------
+
+Steps:
+1. Find middle using fast & slow
+2. Reverse second half
+3. Compare first and second halves
+
+This combines:
+- Fast & Slow
+- Reversal
+- Comparison
+
+---------------------------------
+CASE 5: SPLIT LINKED LIST INTO TWO HALVES
+---------------------------------
+
+Used in:
+- Merge Sort on Linked List
+
+Idea:
+- slow gives midpoint
+- Break list at slow
+
+-----------------------------------------------------
+6. TIME & SPACE COMPLEXITY
+-----------------------------------------------------
+
+Time Complexity:
+- O(n)
+
+Space Complexity:
+- O(1)
+
+Why:
+- No extra data structures used
+- Only pointer manipulation
+
+-----------------------------------------------------
+7. COMMON INTERVIEW MISTAKES
+-----------------------------------------------------
+
+- Using wrong loop condition (fast != null only)
+- Forgetting fast.next != null
+- Losing reference to head
+- Confusing first vs second middle
+- Not handling single-node list
+
+-----------------------------------------------------
+8. FAST & SLOW IN ARRAYS (BONUS)
+-----------------------------------------------------
+
+Used in:
+- Cycle detection in arrays
+- Duplicate number problems
+
+Example:
+LeetCode #287 (Find Duplicate Number)
+
+Idea:
+- Treat array as linked list
+- nums[i] → next pointer
+
+-----------------------------------------------------
+9. MUST-PRACTICE LEETCODE QUESTIONS
+-----------------------------------------------------
+
+CORE:
+- 876. Middle of the Linked List
+- 141. Linked List Cycle
+- 142. Linked List Cycle II
+
+INTERMEDIATE:
+- 234. Palindrome Linked List
+- 148. Sort List
+
+ADVANCED:
+- 287. Find the Duplicate Number
+
+-----------------------------------------------------
+10. QUICK DECISION CHECK (INTERVIEW TRICK)
+-----------------------------------------------------
+
+Ask yourself:
+- Do I need to find middle?
+- Do I need to detect loop?
+- Do I need to compare halves?
+
+If YES → Fast & Slow Pointer.
+
+-----------------------------------------------------
+11. KEY TAKEAWAY (VERY IMPORTANT)
+-----------------------------------------------------
+
+Fast & Slow Pointer pattern lets you:
+- Solve linked list problems in O(n)
+- Use constant space
+- Avoid extra data structures
+
+Master this pattern,
+and linked lists become MUCH easier.
+=====================================================
+END OF FAST & SLOW POINTERS MASTER FILE
+=====================================================

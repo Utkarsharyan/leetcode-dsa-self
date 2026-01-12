@@ -50,7 +50,7 @@ class SingleLinkedList {
     public int findmidnode(){
         Node fast=head;
         Node slow=head;
-        while(fast!=null){
+        while(fast!=null&&fast.next!=null){
             fast=fast.next.next;
             slow=slow.next;
         }
