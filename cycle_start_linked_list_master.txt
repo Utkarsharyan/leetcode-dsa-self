@@ -1,0 +1,87 @@
+=====================================================
+FIND START OF CYCLE — LINKED LIST
+(Floyd’s Algorithm Phase 2)
+=====================================================
+
+PATTERN:
+Fast & Slow Pointers
+
+-----------------------------------------------------
+PROBLEM
+-----------------------------------------------------
+
+Given the head of a linked list,
+return the node where the cycle begins.
+
+If no cycle exists, return null.
+
+-----------------------------------------------------
+STEP 1 — DETECT CYCLE
+-----------------------------------------------------
+
+slow = head
+fast = head
+
+while(fast != null && fast.next != null):
+
+    slow = slow.next
+    fast = fast.next.next
+
+    if slow == fast:
+        cycle detected
+
+-----------------------------------------------------
+STEP 2 — FIND START OF CYCLE
+-----------------------------------------------------
+
+Move slow to head.
+
+while(slow != fast):
+
+    slow = slow.next
+    fast = fast.next
+
+The meeting point is the cycle start.
+
+-----------------------------------------------------
+KEY INSIGHT
+-----------------------------------------------------
+
+Distance(head → cycle start)
+=
+Distance(meeting point → cycle start)
+
+-----------------------------------------------------
+TIME & SPACE
+-----------------------------------------------------
+
+Time: O(n)
+Space: O(1)
+
+-----------------------------------------------------
+COMMON MISTAKES
+-----------------------------------------------------
+
+- Comparing values instead of nodes
+- Forgetting fast.next check
+- Returning meeting node instead of start
+
+-----------------------------------------------------
+LEETCODE QUESTIONS
+-----------------------------------------------------
+
+141. Linked List Cycle
+142. Linked List Cycle II
+287. Find the Duplicate Number
+457. Circular Array Loop
+
+-----------------------------------------------------
+KEY TAKEAWAY
+-----------------------------------------------------
+
+Fast & Slow pointers detect the cycle.
+Reset one pointer to head to find the start.
+
+=====================================================
+END
+=====================================================
