@@ -1,0 +1,307 @@
+=====================================================
+ARRAYS & STRINGS — MASTER PATTERN CHEAT SHEET
+(Interview + LeetCode Ready)
+=====================================================
+
+-----------------------------------------------------
+1. TWO POINTERS PATTERN
+-----------------------------------------------------
+
+WHEN TO USE:
+- Array or String
+- In-place modification
+- Comparing from both ends
+- Reversal, partitioning, swapping
+
+KEYWORDS / SIGNALS:
+- "in-place"
+- "reverse"
+- "palindrome"
+- "move elements"
+- "sorted array"
+
+CORE IDEA:
+Use two indices that move toward each other or in one direction.
+
+BASIC SNIPPET:
+---------------------------------
+int left = 0, right = n - 1;
+while (left < right) {
+    swap(arr[left], arr[right]);
+    left++;
+    right--;
+}
+---------------------------------
+
+VARIANT: Slow–Fast Pointers
+---------------------------------
+int slow = 0;
+for (int fast = 0; fast < n; fast++) {
+    if (condition) {
+        swap(arr[slow], arr[fast]);
+        slow++;
+    }
+}
+---------------------------------
+
+COMMON MISTAKES:
+- Forgetting left < right condition
+- Breaking relative order accidentally
+- Using extra space unnecessarily
+
+LEETCODE PRACTICE:
+- 189. Rotate Array
+- 283. Move Zeroes
+- 125. Valid Palindrome
+
+KEY TAKEAWAY:
+If order matters and space is restricted → think Two Pointers.
+
+-----------------------------------------------------
+2. SLIDING WINDOW (FIXED SIZE)
+-----------------------------------------------------
+
+WHEN TO USE:
+- Subarray / substring
+- Window size is FIXED
+- Sum, average, count, max/min
+
+KEYWORDS:
+- "subarray of size k"
+- "fixed length"
+- "maximum sum"
+- "minimum sum"
+
+CORE IDEA:
+Reuse previous window result instead of recalculating.
+
+SNIPPET:
+---------------------------------
+int windowSum = 0;
+for (int i = 0; i < k; i++) windowSum += arr[i];
+
+for (int i = k; i < n; i++) {
+    windowSum += arr[i];
+    windowSum -= arr[i - k];
+}
+---------------------------------
+
+COMMON MISTAKES:
+- Recomputing sum again and again
+- Forgetting first window initialization
+
+LEETCODE PRACTICE:
+- 643. Maximum Average Subarray I
+- 1343. Number of Subarrays of Size K
+
+KEY TAKEAWAY:
+Fixed window + contiguous → Sliding Window (Fixed).
+
+-----------------------------------------------------
+3. SLIDING WINDOW (VARIABLE SIZE)
+-----------------------------------------------------
+
+WHEN TO USE:
+- Subarray / substring
+- Condition-based (>=, <=, at most)
+- Positive numbers (IMPORTANT)
+
+KEYWORDS:
+- "minimum length"
+- "longest subarray"
+- "sum ≥ target"
+- "at most / at least"
+
+CORE IDEA:
+Expand window to satisfy condition,
+shrink window to optimize result.
+
+SNIPPET:
+---------------------------------
+int left = 0, sum = 0;
+for (int right = 0; right < n; right++) {
+    sum += arr[right];
+    while (condition) {
+        updateAnswer();
+        sum -= arr[left++];
+    }
+}
+---------------------------------
+
+COMMON MISTAKES:
+- Using this when negative numbers exist
+- Forgetting while-loop shrink
+
+LEETCODE PRACTICE:
+- 209. Minimum Size Subarray Sum
+- 904. Fruit Into Baskets
+
+KEY TAKEAWAY:
+Positive numbers + condition-based subarray → Variable Sliding Window.
+
+-----------------------------------------------------
+4. HASHING (FREQUENCY / COMPLEMENT)
+-----------------------------------------------------
+
+WHEN TO USE:
+- Fast lookup needed
+- Count or existence matters
+- Pair / frequency problems
+
+KEYWORDS:
+- "pair exists"
+- "frequency"
+- "anagram"
+- "count"
+
+CORE IDEA:
+Store seen elements or counts for O(1) access.
+
+COMPLEMENT SNIPPET (Two Sum):
+---------------------------------
+Set<Integer> set = new HashSet<>();
+for (int x : arr) {
+    if (set.contains(target - x)) return true;
+    set.add(x);
+}
+---------------------------------
+
+FREQUENCY SNIPPET:
+---------------------------------
+Map<Character, Integer> map = new HashMap<>();
+for (char c : s.toCharArray()) {
+    map.put(c, map.getOrDefault(c, 0) + 1);
+}
+---------------------------------
+
+COMMON MISTAKES:
+- Sorting when hashing is enough
+- Forgetting space tradeoff
+
+LEETCODE PRACTICE:
+- 1. Two Sum
+- 242. Valid Anagram
+
+KEY TAKEAWAY:
+Order doesn’t matter, count does → Hashing.
+
+-----------------------------------------------------
+5. PREFIX SUM
+-----------------------------------------------------
+
+WHEN TO USE:
+- Multiple range queries
+- Subarray sum problems
+- Fast l to r queries
+
+KEYWORDS:
+- "range sum"
+- "multiple queries"
+- "subarray sum equals k"
+
+CORE IDEA:
+Precompute cumulative sums once.
+
+SNIPPET:
+---------------------------------
+prefix[0] = arr[0];
+for (int i = 1; i < n; i++)
+    prefix[i] = prefix[i - 1] + arr[i];
+
+sum(l, r) = prefix[r] - prefix[l - 1]
+---------------------------------
+
+COMMON MISTAKES:
+- Forgetting l == 0 case
+- Recomputing sums per query
+
+LEETCODE PRACTICE:
+- 303. Range Sum Query – Immutable
+- 560. Subarray Sum Equals K
+
+KEY TAKEAWAY:
+Repeated range queries → Prefix Sum.
+
+-----------------------------------------------------
+6. KADANE’S ALGORITHM
+-----------------------------------------------------
+
+WHEN TO USE:
+- Maximum / minimum subarray sum
+- Contiguous subarray
+- Negative numbers allowed
+
+KEYWORDS:
+- "maximum subarray"
+- "largest sum"
+- "contiguous"
+
+CORE IDEA:
+Drop subarrays that hurt future sums.
+
+SNIPPET:
+---------------------------------
+int curr = arr[0], max = arr[0];
+for (int i = 1; i < n; i++) {
+    curr = Math.max(arr[i], curr + arr[i]);
+    max = Math.max(max, curr);
+}
+---------------------------------
+
+COMMON MISTAKES:
+- Resetting sum to 0 blindly
+- Failing on all-negative arrays
+
+LEETCODE PRACTICE:
+- 53. Maximum Subarray
+- 918. Maximum Circular Subarray
+
+KEY TAKEAWAY:
+If sum becomes harmful, discard it.
+
+-----------------------------------------------------
+7. ARRAY REVERSAL TRICK
+-----------------------------------------------------
+
+WHEN TO USE:
+- Rotation
+- Circular shift
+- In-place rearrangement
+
+KEYWORDS:
+- "rotate"
+- "circular"
+- "in-place"
+
+CORE IDEA:
+Rotation = multiple reversals.
+
+SNIPPET:
+---------------------------------
+reverse(arr, 0, n-1);
+reverse(arr, 0, k-1);
+reverse(arr, k, n-1);
+---------------------------------
+
+LEETCODE PRACTICE:
+- 189. Rotate Array
+- 151. Reverse Words in a String
+
+KEY TAKEAWAY:
+Never rotate element-by-element.
+
+=====================================================
+FINAL INTERVIEW MINDSET
+=====================================================
+
+1. Identify if problem is contiguous
+2. Check if window size is fixed or variable
+3. See if order matters or frequency matters
+4. Look for repeated work
+5. Choose the pattern, not the code
+
+If you can answer these, you can solve the problem.
+
+=====================================================
+END OF MASTER FILE
+=====================================================

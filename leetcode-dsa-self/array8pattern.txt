@@ -1,0 +1,122 @@
+==============================
+PATTERN: Two Pointer + Array Reversal
+PROBLEM: Rotate Array by K Steps (Right Rotation)
+==============================
+
+PROBLEM STATEMENT:
+Given an array, rotate the array to the right by k steps.
+The rotation must be done IN-PLACE.
+
+Example:
+arr = [1,2,3,4,5,6,7]
+k = 3
+Output = [5,6,7,1,2,3,4]
+
+--------------------------------
+BRUTE FORCE APPROACH (Naive)
+--------------------------------
+Idea:
+Rotate the array one step at a time, k times.
+
+Steps:
+1. Store the last element.
+2. Shift all elements to the right by one position.
+3. Place the stored element at index 0.
+4. Repeat this process k times.
+
+Time Complexity:
+O(n * k)
+
+Space Complexity:
+O(1)
+
+Why this is inefficient:
+- The same elements are shifted multiple times.
+- Too slow when k or n is large.
+
+--------------------------------
+OPTIMIZED APPROACH (Key Insight)
+--------------------------------
+Right rotation by k means:
+The last k elements come to the front.
+
+We can do this efficiently using ARRAY REVERSAL.
+
+--------------------------------
+PATTERN EXPLANATION:
+Array Reversal + Two Pointers
+--------------------------------
+Key Idea:
+Right rotation can be achieved using 3 reversals.
+
+Steps:
+1. Reverse the entire array
+2. Reverse the first k elements
+3. Reverse the remaining n-k elements
+
+Why this works:
+Reversal rearranges elements in-place while preserving relative order.
+
+--------------------------------
+DRY RUN EXAMPLE:
+--------------------------------
+Original:        [1 2 3 4 5 6 7]
+Reverse all:     [7 6 5 4 3 2 1]
+Reverse first k: [5 6 7 4 3 2 1]
+Reverse rest:    [5 6 7 1 2 3 4]
+
+--------------------------------
+OPTIMIZED CODE (Java)
+--------------------------------
+
+static void rotate(int[] arr, int k) {
+    int n = arr.length;
+    k = k % n;  // handle k > n
+
+    reverse(arr, 0, n - 1);
+    reverse(arr, 0, k - 1);
+    reverse(arr, k, n - 1);
+}
+
+static void reverse(int[] arr, int left, int right) {
+    while (left < right) {
+        int temp = arr[left];
+        arr[left] = arr[right];
+        arr[right] = temp;
+        left++;
+        right--;
+    }
+}
+
+--------------------------------
+TIME & SPACE COMPLEXITY
+--------------------------------
+Time Complexity: O(n)
+Space Complexity: O(1)
+
+--------------------------------
+WHEN TO USE THIS PATTERN
+--------------------------------
+Use Array Reversal + Two Pointers when:
+- In-place rotation is required
+- Circular shifts are involved
+- Extra space is not allowed
+
+--------------------------------
+LEETCODE QUESTIONS (Practice)
+--------------------------------
+1. Rotate Array
+   LeetCode #189
+   https://leetcode.com/problems/rotate-array/
+
+2. Reverse Words in a String
+   LeetCode #151
+   https://leetcode.com/problems/reverse-words-in-a-string/
+
+--------------------------------
+KEY TAKEAWAY
+--------------------------------
+Never rotate an array element-by-element.
+Think in terms of reversing segments.
+This pattern is very common in FAANG interviews.
+==============================
