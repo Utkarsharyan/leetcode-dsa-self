@@ -1,0 +1,266 @@
+BUBBLE SORT — COMPLETE MASTER REVISION NOTES
+
+============================================================
+
+1. CORE INTUITION
+============================================================
+
+Bubble Sort works by repeatedly comparing adjacent elements
+and swapping them if they are in the wrong order.
+
+After each pass:
+→ The largest element "bubbles up" to the end.
+
+Analogy:
+Imagine bubbles in water — larger bubbles rise to the top.
+Similarly, larger numbers move toward the end.
+
+Key Idea:
+
+* Compare neighbors
+* Swap if left > right
+* Repeat passes
+
+---
+
+2. STEP-BY-STEP DRY RUN
+
+Example:
+[5, 3, 4, 1]
+
+Pass 1:
+Compare 5 & 3 → swap → [3,5,4,1]
+Compare 5 & 4 → swap → [3,4,5,1]
+Compare 5 & 1 → swap → [3,4,1,5]
+
+Pass 2:
+Compare 3 & 4 → no swap → [3,4,1,5]
+Compare 4 & 1 → swap → [3,1,4,5]
+
+Pass 3:
+Compare 3 & 1 → swap → [1,3,4,5]
+
+Sorted.
+
+Important:
+After i-th pass → last i elements are sorted.
+
+---
+
+3. JAVA TEMPLATE (INTERVIEW READY)
+
+class Solution {
+public int[] bubbleSort(int[] arr) {
+int n = arr.length;
+
+```
+    for(int i = 0; i < n - 1; i++) {
+        boolean swapped = false;
+
+        for(int j = 0; j < n - i - 1; j++) {
+            if(arr[j] > arr[j + 1]) {
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+                swapped = true;
+            }
+        }
+
+        if(!swapped) break; // optimization
+    }
+
+    return arr;
+}
+```
+
+}
+
+---
+
+4. COMPLEXITY ANALYSIS
+
+Time Complexity:
+Best Case:    O(n)      (already sorted + optimization)
+Average Case: O(n^2)
+Worst Case:   O(n^2)
+
+Space Complexity:
+O(1) (in-place)
+
+Stable:
+YES (relative order preserved)
+
+In-place:
+YES
+
+---
+
+5. IMPORTANT PROPERTIES
+
+✔ Adjacent comparison only
+✔ Largest element moves to end per pass
+✔ Can detect sorted array early (optimization)
+✔ Easy to implement
+✔ Not efficient for large inputs
+
+---
+
+6. COMMON MISTAKES
+
+❌ Using wrong indices in swap
+WRONG:
+temp = arr[i]
+
+CORRECT:
+temp = arr[j]
+
+---
+
+❌ Forgetting j < n - i - 1
+→ Leads to unnecessary comparisons
+
+---
+
+❌ Not using swapped flag
+→ Misses best-case optimization
+
+---
+
+❌ Thinking smallest goes first
+→ Actually largest settles first
+
+---
+
+❌ Using non-adjacent swaps
+→ Breaks bubble sort logic
+
+---
+
+7. WHEN TO USE / NOT USE
+
+Use:
+✔ Small datasets
+✔ Learning sorting fundamentals
+✔ When problem explicitly mentions adjacent swaps
+
+Avoid:
+❌ Large datasets
+❌ Interview optimal solution
+❌ Performance-critical systems
+
+---
+
+8. KEY PATTERN TO RECOGNIZE
+
+If problem says:
+
+* "swap adjacent elements"
+* "simulate passes"
+* "largest element moves gradually"
+
+→ Think BUBBLE SORT
+
+Also:
+
+* Repeated passes shrinking from end
+* Pairwise comparisons
+
+---
+
+9. IMPORTANT VARIATIONS
+
+✔ Optimized Bubble Sort (early stopping)
+✔ Partial Bubble Sort (k passes)
+✔ Detect if array is already sorted
+
+---
+
+10. LEETCODE PROBLEMS USING BUBBLE SORT
+
+---
+
+(1) Sort an Array — LeetCode 912
+
+Approach:
+
+* Apply Bubble Sort directly
+* Not optimal (TLE expected)
+
+Key Learning:
+
+* Implementation practice
+
+---
+
+(2) Sort Colors — LeetCode 75
+
+Approach:
+
+* Use Bubble Sort to push larger values (2s) to end
+* Multiple passes
+
+Better Approach:
+
+* Dutch National Flag (later topic)
+
+---
+
+(3) Relative Sort Array — LeetCode 1122 (basic variant)
+
+Approach:
+
+* Can simulate ordering using bubble-like swaps
+
+---
+
+(4) Check if Array is Sorted
+
+Approach:
+
+* One pass of Bubble Sort logic
+* If any swap needed → not sorted
+
+---
+
+11. SIMILAR PATTERNS
+
+Bubble Sort teaches:
+
+✔ Adjacent swap logic
+✔ Pass-based shrinking window
+✔ Stability concept
+
+Connected patterns:
+→ Insertion Sort (shifting instead of swapping)
+→ Cyclic Sort (placing elements correctly)
+→ Two-pointer swapping problems
+
+---
+
+12. INTERVIEW TALK TRACK
+
+If asked:
+
+"Explain Bubble Sort"
+
+Answer:
+
+Bubble Sort is a simple comparison-based sorting algorithm
+that repeatedly compares adjacent elements and swaps them
+if they are in the wrong order. After each pass, the largest
+unsorted element moves to its correct position at the end.
+It has O(n^2) time complexity and is stable and in-place.
+
+---
+
+13. FINAL SUMMARY (REVISION IN 10 SECONDS)
+
+* Compare neighbors
+* Swap if needed
+* Largest goes to end
+* Repeat n-1 times
+* O(n^2), stable, in-place
+
+---
+
+## END OF BUBBLE SORT MASTER NOTES
